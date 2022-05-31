@@ -1,0 +1,31 @@
+function sendTelegram() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var activeCell = ss.getActiveSheet().getActiveCell();
+  var sheet = ss.getSheets()[0];
+  var range = sheet.getRange("C:C").getValues();
+  var rowNum = activeCell.getRow();
+  var lastRow = range.filter(String).length;
+
+  //define what rows and cells will be choosen
+  var orderName = ss.getActiveSheet().getRange(lastRow,3).getValue();
+  var orderPhone = ss.getActiveSheet().getRange(lastRow,4).getValue();
+  var orderQuantity = ss.getActiveSheet().getRange(lastRow,6).getValue();
+  var orderType = ss.getActiveSheet().getRange(lastRow,8).getValue();
+  var orderMedical = ss.getActiveSheet().getRange(lastRow,10).getValue();
+  var orderGegiena = ss.getActiveSheet().getRange(lastRow,13).getValue();
+  var ordermanager = ss.getActiveSheet().getRange(lastRow,15).getValue();
+  var orderAdress = ss.getActiveSheet().getRange(lastRow,18).getValue()
+
+  var tokken = your-bot-token;
+  var chatID = chat_id 
+  
+  //create text of message that you will send to chat via bot
+  var text = encodeURIComponent("ФИО: " + orderName + "\n" + "Номер телефона: " + orderPhone + "\n"+ "Количество человек: " + orderQuantity + "\n" + "Продукты питания: " + orderType + "\n" + "Лекарства: " + orderMedical + "\n" + "Гигиена: " + orderGegiena + "\n" + "Координатор: " + ordermanager + "\n" + "Адресс: " + orderAdress);
+  var lurl = "https://api.telegram.org/bot" + tokken + "/sendMessage?chat_id=" + chatID + "&text=" + text;
+  // make url shorter, because UrlFetchApp have limitation related to number of elements in the link
+  var url = UrlShortener.Url.insert({
+   longUrl: Lurl
+   });
+  // Send link
+  var respond = UrlFetchApp.fetch(url.id).getContentText();
+}
